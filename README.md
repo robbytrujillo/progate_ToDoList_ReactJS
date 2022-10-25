@@ -2,4 +2,4 @@
 
 # Progate Study React JS
 
-<h2>ToDo List React JS</h2>
+<h2>React Hooks & Component Lifecycle from ReactJS</h2>

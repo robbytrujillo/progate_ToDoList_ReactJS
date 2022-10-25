@@ -1,74 +1,104 @@
 import React from 'react'
-import Todos from './components/Todos';  // Lalukan Import
-import TodoForm from './components/TodoForm' // Lakukan import TodoForm
-
+import Counter from './components/Counter'
+import GameOver from './components/GameOver'
 
 class App extends React.Component {
-  state = {
-    todos: [
-      {
-        id: 1,
-        title: 'Finish Progate React Course',
-        completed: true // Menganti nilai awal ke true
-      },
-      {
-        id: 2,
-        title: 'Have lunch with Guru Domba',
-        completed: false
-      },
-      {
-        id: 3,
-        title: 'Study React with Ninja Ken',
-        completed: false
-      }
-    ]
+  constructor(props) {
+    super(props)
+    this.state = {isGameOver: false}
   }
 
-  // toggleCompleted = () => {
-  //   console.log('this is toggleCompleted function')
-  // }
-
-  toggleCompleted = (todoId) => {
-    const updatedTodos = this.state.todos.map((todo) => {
-      if (todo.id === todoId) {
-        todo.completed = !todo.completed
-      }
-      return todo
-    })
-    this.setState({todos: updatedTodos})
-  }
-
-  addTodo = (todoTitle) => {
-    const todos = this.state.todos
-    if (todoTitle === '') {
-      return
-    }
-
-    const newTodo = {
-      id: todos.length + 1,
-      title: todoTitle,
-      completed: false
-    }
-
-    const updatedTodos = this.state.todos.concat(newTodo)
-    this.setState({todos: updatedTodos})
+  finishGame = () => {
+    this.setState({isGameOver: true})
   }
 
   render() {
-    //console.log(this.state.todos)
+    let component;
+    if (this.state.isGameOver) {
+      component = <GameOver />
+    } else {
+      component = <Counter finishGame={this.finishGame} />
+    }
+
     return (
-      <div style={{textAlign: 'center', padding: '12px'}}>
-        <h1>My Todo List</h1>
-        {/* Menampilkan component TodoForm */}
-        <TodoForm addTodo={this.addTodo}/>
-        <Todos
-          todos={this.state.todos}
-          toggleCompleted={this.toggleCompleted}
-          deleteTodo={this.deleteTodo}
-        />
+      <div style={{textAlign: 'center', marginTop: '30px'}}>
+        {component}
       </div>
-    );
+    )
   }
 }
 
 export default App;
+
+
+
+
+
+
+// import React, {useState} from 'react'
+// import Todos from './components/Todos';
+// import TodoForm from './components/TodoForm'
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {count: 0};
+//   }
+  
+//   handleClick() {
+//     this.setState({count: this.state.count + 1});
+//   }
+  
+//   render() {
+//     return (
+//       <div>
+//         <h1>{this.state.count}</h1>
+//         <button onClick={() => {this.handleClick()}}>+</button>
+//       </div>
+//     );
+//   }
+// }
+
+// import React from 'react'
+
+// class App extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {count: 0};
+//   }
+  
+//   handleClick() {
+//     this.setState({count: this.state.count + 1});
+//   }
+  
+//   render() {
+//     return (
+//       <div>
+//         <h1>{this.state.count}</h1>
+//         <button onClick={() => {this.handleClick()}}>+</button>
+//       </div>
+//     );
+//   }
+// }
+
+
+//react hook
+// import React, {useState} from 'react';
+
+// const App = () => {
+//   const [count, setCount] = useState(0)
+
+//   const handleClick = () => {
+//     setCount(count + 1);
+//   }
+
+//   return (
+//     <div>
+//       <h1>{count}</h1>
+//       <button onClick={() => {handleClick()}}>+</button>
+//     </div>
+//   );
+// }
+
+// export default App;
+
